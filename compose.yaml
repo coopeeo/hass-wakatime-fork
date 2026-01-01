@@ -1,0 +1,18 @@
+name: hass-wakatime-dev
+
+services:
+  homeassistant:
+    container_name: hass-wakatime-dev
+    image: ghcr.io/home-assistant/home-assistant:dev
+    volumes:
+      - ./config:/config
+      - ./custom_components/hass_wakatime:/config/custom_components/hass_wakatime
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    ports:
+      - 8123:8123
+    restart: unless-stopped
+    privileged: true
+    # network_mode: host
+    environment:
+      TZ: Europe/Amsterdam
